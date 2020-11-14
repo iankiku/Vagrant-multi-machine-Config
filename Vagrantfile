@@ -21,7 +21,7 @@ Vagrant.configure('2') do |config|
     # rails.vm.network "forwarded_port", guest: 80, host: 3000
     rails.vm.network 'forwarded_port', guest: 3000, host: 8080, host_ip: '127.0.0.1'
 
-    rails.vm.synced_folder './projects/services-api', '/home/vagrant/services-api'
+    rails.vm.synced_folder './projects/services-api', '/home/vagrant/services-api', type: 'smb'
 
     # Provider-specific configuration
     rails.vm.provider 'virtualbox' do |vb|
@@ -36,9 +36,8 @@ Vagrant.configure('2') do |config|
 
     # # if you choose to use inline shell commands
     # rails.vm.provision 'shell', inline: <<-SHELL
-     #write shell commands here
+    # write shell commands here
     # SHELL
-    
   end
 
   #
@@ -58,7 +57,10 @@ Vagrant.configure('2') do |config|
 
     mernVM.vm.provision 'shell', path: 'mern-stack.sh', privileged: false
 
-    mernVM.vm.synced_folder './projects/webportfolio', '/home/vagrant/webportfolio'
+    mernVM.vm.synced_folder './projects/api-myportfolio', '/home/vagrant/api-myportfolio'
+
+    #  React Front End Application
+    mernVM.vm.synced_folder './projects/app-myportfolio', '/home/vagrant/app-myportfolio'
   end
 
   # #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
